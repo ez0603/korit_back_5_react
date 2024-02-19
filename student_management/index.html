@@ -43,9 +43,26 @@
             // deleteButton.onclick = () => {
             //     studentInfoList.removeChild(newLi);
             // }
+                
+            studentInfoList.innerHTML += `<li>이름: ${student.name} / 나이: ${student.age}<button class="delete-button" onclick="handRemoveClick()">삭제</button></li>`
+            // innerHTML의 문제점 
+            // += 새로 대입 (기존의문자열+새로운문자열)
+            // 다시 만들어진것 -> 객체가 다시 만들어지면 이벤트가 날라감
+            const deleteButtons = document.querySelectorAll(".delete-button");
 
-            studentInfoList.innerHTML += `<li>이름: ${student.name} / 나이: ${student.age}<button>삭제</button></li>`
+            for(let i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].onclick = () => {
+                    const li = studentInfoList.querySelectorAll("li")[i]
+                    studentInfoList.removeChild(li);
+                }
+            }
         }
+
+        // function handRemoveClick(event) { 
+        //     const studentInfoList = document.querySelector("ul");
+        //     studentInfoList.removeChild(event.target.parentNode);
+        // }
+
 
         // function StudentInfo({ name, age }) {
         //     return
