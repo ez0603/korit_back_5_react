@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        const box = document.querySelector(".box");
+
+        const newDiv = document.createElement("div"); // 1.div 태그만들기
+        const testText = document.createTextNode("test"); // 2.test node 만들기
+
+         newDiv.appendChild(testText);       // 1,2 결과값 : <div>test</div>
+         box.appendChild(newDiv);
+
+         box.innerHTML = `<div>test</div>`; // 위의 코드들을 간단하게 만든것 = .innerHTML
+    </script>
+</body>
+</html>
