@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useRef } from "react";
 
-function InfoInput({ setName, setAge, setAddress }) {
-
+function InfoInput({ name, onChange, value, placeholder, inputRef }) {
+    
     // const [ inputName, setInputName ] = useState("");
     // const [ inputAge, setInputAge ] = useState(0);
     // const [ inputAddress, setInputAddress ] = useState("");
@@ -34,8 +34,11 @@ function InfoInput({ setName, setAge, setAddress }) {
     //     setInputAddress("");
     // }
 
+    
+
     return (
         <>
+        <input type="text" value={ value } name="{ name }" onChange={ onChange } placeholder={ placeholder } ref={ inputRef }/>
             {/* <input type="text" placeholder='이름' onChange={ handleOnchangeName } value={inputName} />
             <input type="text" placeholder='나이' onChange={ handleOnchangeAge } value={inputAge} />
             <input type="text" placeholder='주소' onChange={ handleOnchangeAddress } value={inputAddress}/>
@@ -43,6 +46,10 @@ function InfoInput({ setName, setAge, setAddress }) {
             <button onClick={ handleOnClickDelete }>비우기</button> */}
         </>
     );
+}
+
+InfoInput.defaultProps = {
+    ref: null
 }
 
 export default InfoInput;

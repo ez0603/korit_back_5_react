@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import InfoButtons from "./components/InfoButtons";
+import StudentInfo from "./components/StudentInfo";
+import InfoInput from "./components/InfoInput";
 
 
 function App() {
@@ -8,9 +11,24 @@ function App() {
       address: ""
     }
 
-    const [ student, setStudent ] = useState(studentObj);// student라는 객체로 묶어줌 useState(기본값) , studentObjf를 객체로 빼주어 기본값으로 넣어줌
+    const [ student, setStudent ] = useState(studentObj);// student라는 객체로 묶어줌 useState(기본값) , studentObjf를 객체로 빼주어 기본값으로 넣어줌 
     const [ inputValues, setInputValues] = useState(studentObj);
     const [ refresh, setRefresh ] = useState(false);
+    const InputRef = {
+      name: useRef(),
+      age: useRef(),
+      address: useRef()
+    }
+    // InputRef 객체로 묶어줌
+    // const nameInputRef = useRef();
+    // const ageInputRef = useRef();
+    // const addressRef = useRef();
+
+    useEffect(() => {
+      console.log(InputRef.name.current);
+    }, [])
+
+
 
     useEffect(() => { // useEffect = DOM요소의 변화 인지, 뒤 배열에 student를 넣으면 student의 값이 변하면(조건) useEffect가 동작, 배열[]이 비어있을때 = 처음 한번만 동작, 배열[]안에는 상태만 들어감
       if(refresh) {
@@ -86,24 +104,30 @@ function App() {
 
   return (
     <>
-      <h1>이름 : {student.name} </h1>
+      {/* <h1>이름 : {student.name} </h1>
       <h1>나이 : {student.age}</h1>
-      <h1>주소 : {student.address}</h1>
-
+      <h1>주소 : {student.address}</h1> */}
+{/* 
       <input type="text" value={inputValues.name} name="name" onChange={ handleInputChange } placeholder='이름' />
       <input type="text" value={inputValues.age} name="age" onChange={ handleInputChange } placeholder='나이' />
-      <input type="text" value={inputValues.address} name="address" onChange={ handleInputChange } placeholder='주소' />
+      <input type="text" value={inputValues.address} name="address" onChange={ handleInputChange } placeholder='주소' /> */}
 
-      {/* <StudentInfo/>
-      <StudentInfo/>
-      <StudentInfo/>
+      <StudentInfo title="이름" text={student.name} />
+      <StudentInfo title="나이" text={student.age} />
+      <StudentInfo title="주소" text={student.address} />
 
-      <InfoInput/>
-      <InfoInput/>
-      <InfoInput/> */}
+      <InfoInput name="name" onChange={ handleInputChange } value={ inputValues.name } placeholder='이름' inputRef={ InputRef.name }/>
+      <InfoInput name="age" onChange={ handleInputChange } value={ inputValues.name } placeholder='나이' inputRef={ InputRef.age }/>
+      <InfoInput name="address" onChange={ handleInputChange } value={ inputValues.name } placeholder='주소' inputRef={ InputRef.address }/>
 
-      <button onClick={ handleOnClickOk }>확인</button>
-      <button onClick={ handleOnClickDelete }>비우기</button>
+      <InfoButtons>
+          <button onClick={ handleOnClickOk }>확인</button> 
+          <button onClick={ handleOnClickDelete }>비우기</button> 
+      </InfoButtons>
+      
+
+      {/* <button onClick={ handleOnClickOk }>확인</button>
+      <button onClick={ handleOnClickDelete }>비우기</button> */}
     </>
   );
 }
