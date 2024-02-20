@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 
 
 function App() {
-    const studentObj = {
+    const studentObj = { 
       name: "",
       age: "",
       address: ""
     }
 
-    const [ student, setStudent ] = useState(studentObj);// student라는 객체로 묶어줌
-    const [ inputValues, setInputValues] = useState (studentObj)
+    const [ student, setStudent ] = useState(studentObj);// student라는 객체로 묶어줌 useState(기본값) , studentObjf를 객체로 빼주어 기본값으로 넣어줌
+    const [ inputValues, setInputValues] = useState(studentObj);
     const [ refresh, setRefresh ] = useState(false);
 
     useEffect(() => { // useEffect = DOM요소의 변화 인지, 뒤 배열에 student를 넣으면 student의 값이 변하면(조건) useEffect가 동작, 배열[]이 비어있을때 = 처음 한번만 동작, 배열[]안에는 상태만 들어감
@@ -62,19 +62,20 @@ function App() {
 
       setInputValues({
         ...inputValues,
-        [name]: value 
+        [name]: value // 변수의 값(return에 있는 name -> handleInputChange{name})을 담기위해 배열[]안에넣어줌
       });
 
     }
     
     const handleOnClickOk = () => {
       // promise를 생성해주는 이유 : await을 쓰려면 promise에만 가능하기때문 비동기를 동기로 만들어주기 위해 / 비동기를 동기로 만들어주는 이유 : setInputValues가 먼저 처리되면 setStudent에 빈값이 들어오기 때문 
-      new Promise((resolve, reject) => {
-        setStudent(inputValues)
-        resolve();
-      }).then(() => {
-        setInputValues(studentObj)
-      });
+      // new Promise((resolve, reject) => {
+      //   setStudent(inputValues)
+      //   resolve();
+      // }).then(() => {
+      //   setInputValues(studentObj)
+      // });
+      setStudent(inputValues);
     }
 
     const handleOnClickDelete = () => {
