@@ -1,3 +1,5 @@
+import React from "react";
+
 function StudentInfo({ title, text }) {
     // const [ name, setName ] = useState("");
     // const [ age, setAge ] = useState(0);
