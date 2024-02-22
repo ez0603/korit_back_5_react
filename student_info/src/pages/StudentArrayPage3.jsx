@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 function StudentArrayPage3(props) {
-    const [ studentList, setStudentList ] = useState([]);
+    const [ stuedntList, setStudtenList ] = useState([]);
     const [ inputValue, setInputValue ] = useState({
         id: "",
         name: "",
@@ -19,14 +19,14 @@ function StudentArrayPage3(props) {
 
 
     useEffect(() => {
-        const total = studentList.reduce((result, student) => result + student.score, 0);
-        const avg = studentList.length === 0 ? 0 : total / studentList.length;
+        const total = stuedntList.reduce((result, student) => result + student.score, 0);
+        const avg = stuedntList.length === 0 ? 0 : total / stuedntList.length;
 
         setScoreData({
             total,
             avg
         });
-    }, [studentList])
+    }, [stuedntList])
 
 
     const handleInputChange = (e) => {
@@ -44,16 +44,16 @@ function StudentArrayPage3(props) {
             score: parseInt(inputValue.score)
         };
 
-        setStudentList([...studentList, student]);
+        setStudtenList([...stuedntList, student]);
     }
 
     const handleRemoveClick = (id) => {
-        setStudentList(studentList.filter(student => student.id !== id));
+        setStudtenList(stuedntList.filter(student => student.id !== id));
     }
 
     const handleUpdateClick = (id) => {
         setUpdateId(id);
-        setInputValue(studentList.filter(student => student.id === id)[0]);
+        setInputValue(stuedntList.filter(student => student.id === id)[0]);
     }
 
     const handleCancelClick = () => {
@@ -66,7 +66,7 @@ function StudentArrayPage3(props) {
     }
 
     const handleUpdateSubmitClick = () => {
-        setStudentList(studentList.map(student => {
+        setStudtenList(stuedntList.map(student => {
             return student.id !== updateId ? student : {
                 id: updateId,
                 name: inputValue.name,
@@ -94,7 +94,7 @@ function StudentArrayPage3(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {studentList.map(student => {
+                    {stuedntList.map(student => {
                         return (
                             <tr key={student.id}>
                                 <td>{student.id}</td>
