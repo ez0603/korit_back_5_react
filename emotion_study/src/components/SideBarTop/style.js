@@ -1,36 +1,34 @@
 import { css } from "@emotion/react";
 
-// 함수를 호출하면 return값으로 css, `` 안에 있는 값들은 다 문자열
-export const layout = (isShow) => css` 
+export const layout = (isShow) => css`
     box-sizing: border-box;
     position: fixed;
-    top: 0;
-    left: ${isShow ? "0px" : "-300px"};
+    top: ${isShow ? "0px" : "-80px"};
+    right: 0;
     z-index: 99;
-    border-right: 1px solid #dbdbdb;
-    width: 300px;
-    height: 100%;
-    transition: left 0.5s ease-in-out;
+    width: 50%;
+    height: 80px;
+    transition: top 0.5s ease-in-out;
     background-color: white;
-    box-shadow: 1px 0px 2px #00000022;
+    box-shadow: -1px 0px 2px #00000022;
 `;
 
 export const toggleButton = css`
     box-sizing: border-box;
     position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    right: -15px;
+    transform: translateX(-50%);
+    right: 0;
+    bottom: -15px;
+    width: 50px;
+    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
-    border: 1px solid #dbdbdb;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    width: 15px;
-    height: 50px;
     background-color: white;
+    border: 1px solid #dbdbdb;
+    border-bottom-left-radius : 8px;
+    border-bottom-right-radius: 8px;
     cursor: pointer;
     &:hover {
         background-color: #eee;
@@ -41,10 +39,11 @@ export const toggleButton = css`
 `;
 
 export const menuList = css`
+    height: 100%;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px 0px;
 `;
 
 export const menuItem = css`
@@ -52,17 +51,15 @@ export const menuItem = css`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border-bottom: 1px solid #dbdbdb;
-    width: 100%;
+    border: 1px solid #dbdbdb;
+    width: 200px;
     height: 50px;
+    margin: 10px;
+    background-color: white;
+    text-decoration: none;
     color: black;
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
-    &:nth-of-type(1) {
-        border-top: 1px solid #dbdbdb;
-    }
     &:hover {
         background-color: #eee;
     }
