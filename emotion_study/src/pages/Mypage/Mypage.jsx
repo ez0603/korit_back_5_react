@@ -7,7 +7,7 @@ function Mypage() {
     const [ preview, setPreview ] = useState("");
     const imgFileRef = useRef();
 
-    const handleImgFileCjange = (e) => {
+    const handleImgFileChange = (e) => {
         const fileReader = new FileReader();
 
         if(e.target.files.length === 0) { // length가 0 이면 아무것도 들어있지 않은 값 = 취소
@@ -27,7 +27,7 @@ function Mypage() {
                 <h1 css={S.title}>마이페이지</h1>
                 <div css={S.profileImg} onClick={() => imgFileRef.current.click()}>
                     <img src={preview} alt="" />
-                    <input style={{display: "none"}} type="file" ref={imgFileRef} onChange={handleImgFileCjange}/>
+                    <input style={{display: "none"}} type="file" ref={imgFileRef} onChange={handleImgFileChange}/>
                 </div>
                 <div css={S.nicknameLayout}>
                     <input css={S.nickname} type="text" maxLength={20}/>
