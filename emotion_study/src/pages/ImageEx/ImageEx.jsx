@@ -4,6 +4,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/
 import { useEffect, useRef, useState } from "react";
 import { storage } from "../../configs/firebase/firebaseConfig";
 import { Line } from "rc-progress";
+import { v4 as uuid } from "uuid"; 
 
 const layout = css`
     display: flex;
@@ -27,14 +28,14 @@ const imageLayout = css`
 `;
 
 function ImageEx() {
-    const [ url, setUrl ] = useState("");
+    const [ urls, setUrls ] = useState([]);
     const [ uploadFiles, setUploadFiles ] = useState([]);
     const [ imgpreviews, setImgpreviews ] = useState([]);
     const [ progressPercent, setProgressPercent ] = useState(0);
     const imgRef = useRef();
 
     useEffect(() => {
-        setUrl(!localStorage.getItem("url") ? "" : localStorage.getItem("url")); // ! 하나 = 비어 있으면 참
+        setUrls(!localStorage.getItem("urls") ? [] : JSON.parse(localStorage.getItem("urls"))); // ! 하나 = 비어 있으면 참
     }, []);
 
     const handleClickChange = (e) => {
@@ -93,9 +94,17 @@ function ImageEx() {
 
     const handleImageUpload = () => {
         const file = uploadFiles[0];
-        console.log(uploadFiles);
-        const storageRef = ref(storage, `files/test/${file.name}`);
+        const storageRef = ref(storage, `files/test/${uuid()}_${file.name}`); // uuid = 고유번호가 겹치지 않게 해주는것
         const uploadTask = uploadBytesResumable(storageRef, file);
+
+        let promises = [];
+
+        promises = uploadFiles.map(uploadFiles => new Promise((resolve) => {
+            const storageRef = ref(storage, `files/test/${uuid()}_${uploadFiles.name}`); // uuid = 고유번호가 겹치지 않게 해주는것
+            const uploadTask = uploadBytesResumable(storageRef, uploadFiles);
+
+        }))
+
 
         uploadTask.on(
             "state_changed",
@@ -106,7 +115,7 @@ function ImageEx() {
             () => {
                 getDownloadURL(storageRef).then(url => {
                     localStorage.setItem("url", url);
-                    setUrl(url);
+                    setUrls(url);
                     setImgpreviews([]); // 업로드가 되면 필요없기 때문에 빈값 넣어줌
                 })
             }
@@ -115,9 +124,11 @@ function ImageEx() {
 
     return (
         <div css={layout}>
+            {urls.map(url => 
                 <div css={imageLayout}>
                     <img src={url} alt="" />
                 </div>
+            )}
             {imgpreviews.map((imgpreview, index) => 
                 <>
                     <div key={index} css={imageLayout}>
