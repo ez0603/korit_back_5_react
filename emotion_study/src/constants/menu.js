@@ -1,5 +1,6 @@
 import Mypage from "../pages/Mypage/Mypage";
 import ImageEx from "../pages/ImageEx/ImageEx"
+import ImageEx2 from "../pages/ImageEx2/ImageEx2";
 
 
 export const MENUS = [
@@ -26,5 +27,11 @@ export const MENUS = [
         path: "/image/ex",   
         name: "이미지 불러오기",
         element: <ImageEx />
+    },
+    {
+        id: 5,
+        path: "/image/ex2",   
+        name: "다중 업로드",
+        element: <ImageEx2 />
     }
 ];

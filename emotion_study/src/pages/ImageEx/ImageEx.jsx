@@ -91,6 +91,7 @@ function ImageEx() {
             setImgpreviews(result);
         });
     }
+    
 
     const handleImageUpload = () => {
         const file = uploadFiles[0];
@@ -137,7 +138,7 @@ function ImageEx() {
                     <Line percent={progressPercent} strokeWidth={4} strokeColor={"#dbdbdb"}/>  
                 </>
             )}
-        <input style={{display: "none"}} type="file" ref={imgRef} onChange={handleClickChange} multiple={true}/>
+        <input style={{display: "none"}} type="file" ref={imgRef} onChange={(handleClickChange)} multiple={true}/>
         <button onClick={() => imgRef.current.click()}>이미지 불러오기</button>
         <button onClick={handleImageUpload}>이미지 업로드</button>
     </div>
