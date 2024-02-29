@@ -22,7 +22,7 @@ const boardListLayout = css`
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
     width: 900px;
-    height: 100%;
+    height: 500px;
 `;
 
 const boardListHeader = css`
@@ -100,9 +100,11 @@ function BoardList() {
                 </Link>
                     )}
             </ul>
-            {pageNumbers.map(pageNumber => 
-                <Link to={`/board/list?page=${pageNumber}`}>{pageNumber}</Link>
+            <div>
+                {pageNumbers.map(pageNumber => 
+                  <Link to={`/board/list?page=${pageNumber}`}>{pageNumber}</Link>
                 )}
+            </div>
         </div>
     );
 }
