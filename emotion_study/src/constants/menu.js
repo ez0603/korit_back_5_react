@@ -51,7 +51,7 @@ export const MENUS = [
     },
     {
         id: 8,
-        path: "/board/list",   
+        path: "/board/list?page=1", // 무조건 1번페이지 부터시작해야하기 때문에 ?page=1    
         name: "게시글 목록",
         element: <BoardList />
     }

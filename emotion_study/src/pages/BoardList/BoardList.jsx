@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useLoadList } from "../../hooks/boardList";
+import { Link, useSearchParams } from "react-router-dom";
+import { useLoadList, useLoadListByPageNumber } from "../../hooks/boardList";
 
 const layout = css`
     display: flex;
@@ -22,7 +22,7 @@ const boardListLayout = css`
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
     width: 900px;
-    height: 500px;
+    height: 100%;
 `;
 
 const boardListHeader = css`
@@ -78,8 +78,10 @@ const boardListItem = css`
 `;
 
 function BoardList() {
+    const [searchParams] = useSearchParams();
+    const page = searchParams.get("page");
 
-    const { boardList } = useLoadList();
+    const { boardList, pageNumbers, totalPageCount } = useLoadListByPageNumber(page);
 
     return (
         <div css={layout}>
@@ -98,6 +100,9 @@ function BoardList() {
                 </Link>
                     )}
             </ul>
+            {pageNumbers.map(pageNumber => 
+                <Link to={`/board/list?page=${pageNumber}`}>{pageNumber}</Link>
+                )}
         </div>
     );
 }

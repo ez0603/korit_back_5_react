@@ -52,19 +52,23 @@ const submitButton = css`
 
 function BoardWrite() {
     const navigate = useNavigate();
-    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(10);
+    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(20);
     // const [ inputValue2, handleInputChange2 ] = useInput(); // Hook으로 빼주었기때문에 또 다른 useInput을 호출해주면됨(재사용)
     const[ quillValue, handleQuillValueChange ] = useQuillInput();
     const { boardList, lastID } = useLoadList()
 
     const handleSubmitClick = () => {
-        const board = {
-            boardId: lastID + 1,
-            boardTitle: inputValue,
-            boardContent: quillValue
-        };
+        let newBoardList = [];
 
-        const newBoardList = [...boardList, board];
+        for(let i = 0; i < 203; i++) {
+            const board = {
+                boardId: i + 1,
+                boardTitle: inputValue + (i + 1),
+                boardContent: quillValue
+            };
+            newBoardList = [...newBoardList, board];
+        }
+
         localStorage.setItem("boardList", JSON.stringify(newBoardList));
         alert("글 작성 완료.");
         navigate("/board/list")
@@ -94,4 +98,4 @@ function BoardWrite() {
     );
 }
 
-0export default BoardWrite;
+export default BoardWrite;
