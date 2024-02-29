@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useInput, useMaxSizeValidateInput } from "../../hooks/inputHook";
 import { useQuillInput } from "../../hooks/quilHook";
 import { useNavigate } from "react-router-dom";
-import { useLoadList } from "../../hooks/boardList";
+import { useLoadList } from "../../hooks/boardListHook";
 
 const layout = css`
     display: flex;
