@@ -12,7 +12,7 @@ function Mypage() {
 
         if(e.target.files.length === 0) { // length가 0 이면 아무것도 들어있지 않은 값 = 취소
             return;
-        }
+     }
 
         fileReader.onload = (e) => {
             setPreview(e.target.result);
