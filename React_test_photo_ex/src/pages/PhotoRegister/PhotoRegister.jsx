@@ -58,7 +58,6 @@ function PhotoRegister() {
             }
 
             fileReader.readAsDataURL(file);
-
         }));
 
 
